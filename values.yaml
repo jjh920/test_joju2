@@ -1,15 +1,17 @@
-# Default values for hellomsa.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
-replicaCount: 1
-
-services:
-  frontendapp:
-    name: test
-    image: 639785999924.dkr.ecr.ap-northeast-2.amazonaws.com/test_jojuhyeon
-    tag: latest
-    port: 3000
-nginx:
-  image: nginx
-  tag: latest
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-application
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  source:
+    repoURL: https://github.com/jjh920/test_joju2.git
+    path: path/to/kubernetes/manifests
+    targetRevision: HEAD
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
