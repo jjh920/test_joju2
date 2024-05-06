@@ -1,17 +1,10 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: my-application
-spec:
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: default
-  source:
-    repoURL: https://github.com/jjh920/test_joju2.git
-    path: path/to/kubernetes/manifests
-    targetRevision: HEAD
-  project: default
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+replicaCount: 1
+imagePullSecrets:
+  - name: ecr-regcred
+nameOverride: ""
+fullnameOverride: ""
+
+image:
+  repository: 639785999924.dkr.ecr.ap-northeast-2.amazonaws.com/test_jojuhyeon
+  tag: latest
+  port: 1111
